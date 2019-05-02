@@ -9,7 +9,8 @@ PAD_VALUE = 0.5 #scalar pad value to use for the padded points
 # output is of shape [1, 331, 331, 3]
 def defend(input_tensor):
     rnd = tf.random_uniform((), 299, 331, dtype=tf.int32)
-    rescaled = tf.image.crop_and_resize(input_tensor, [[0, 0, 1, 1]], [0], [rnd, rnd]) #takes in image, bounding box locations, box index, and desired output crop size; extracts crop from input tensor and resizes them
+    rescaled = tf.image.crop_and_resize(input_tensor, [[0, 0, 1, 1]], [0], [rnd, rnd]) #takes in image, bounding box locations (this basically corresponds to the bounds you are selecting to pad where 0 is the bottom of the image and 1 is the top height, box index, and desired output crop size; extracts crop from input tensor and resizes them
+    #uses bilinear sampling or nearest neighbor sampling to do the final resize (wrt aspect ratio change)
     h_rem = 331 - rnd
     w_rem = 331 - rnd
     pad_left = tf.random_uniform((), 0, w_rem, dtype=tf.int32) #random values from uniform distribution from 0 to w_rem

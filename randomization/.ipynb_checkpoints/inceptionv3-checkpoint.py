@@ -6,6 +6,7 @@ import functools
 import os
 
 _INCEPTION_CHECKPOINT_NAME = 'inception_v3.ckpt'
+#join the two paths
 INCEPTION_CHECKPOINT_PATH = os.path.join(
     os.path.dirname(__file__),
     'data',
@@ -13,6 +14,7 @@ INCEPTION_CHECKPOINT_PATH = os.path.join(
 )
 
 def _get_model(reuse):
+    ''''''
     arg_scope = nets.inception.inception_v3_arg_scope(weight_decay=0.0)
     func = nets.inception.inception_v3
     @functools.wraps(func)

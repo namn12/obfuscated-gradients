@@ -1,3 +1,5 @@
+'''Returns the model once the randomization/padding has been done'''
+
 import robustml
 from defense import defend
 from inceptionv3 import model as inceptionv3_model
@@ -9,7 +11,7 @@ class Randomization(robustml.model.Model):
         self._input = tf.placeholder(tf.float32, (299, 299, 3))
         input_expanded = tf.expand_dims(self._input, axis=0)
         randomized = defend(input_expanded)
-        self._logits, self._predictions = inceptionv3_model(sess, randomized)
+        self._logits, self._predictions = inceptionv3_model(sess, randomized) #output from the inceptionv3 predictions
         self._dataset = robustml.dataset.ImageNet((299, 299, 3))
         self._threat_model = robustml.threat_model.Linf(epsilon=8.0/255.0)
 

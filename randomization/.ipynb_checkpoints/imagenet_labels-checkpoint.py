@@ -1,3 +1,5 @@
+'''The image net labels'''
+
 _lut = [
     'tench, Tinca tinca',
     'goldfish, Carassius auratus',

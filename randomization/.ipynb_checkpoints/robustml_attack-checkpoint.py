@@ -34,6 +34,7 @@ class EOT(robustml.attack.Attack):
         lower = np.clip(x - self._epsilon, 0, 1)
         upper = np.clip(x + self._epsilon, 0, 1)
         for i in range(self._max_steps):
+            #predicted, loss, gradients
             p, l, g = self._sess.run(
                 [self._preds, self._loss, self._grad],
                 {self._input: adv, self._label: y}
